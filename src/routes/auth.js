@@ -12,4 +12,8 @@ authRouter
     .get(userController.get.login)
     .post(userController.post.login);
 
+authRouter
+    .route('/logout')
+    .get(userController.get.logout);
+
 module.exports = authRouter;

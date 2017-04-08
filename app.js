@@ -36,7 +36,7 @@ require('./src/config/passport')(app);
 
 app.use('/', require('./src/routes/index'));
 app.use('/auth', require('./src/routes/auth'));
-app.use('/api/v1', require('./src/routes/api'));
+// app.use('/api/v1', require('./src/routes/api'));
 /*  error handlers  */
 
 // production error handler

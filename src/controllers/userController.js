@@ -60,13 +60,19 @@ let userController = function() {
         res.render('index');
     }
 
+    function getLogout(req, res) {
+        req.logout();
+        res.redirect('/');
+    }
+
 
     return {
         middleware: middleware,
         get: {
             login: getLogin,
             registration: getRegistration,
-            index: getIndex
+            index: getIndex,
+            logout: getLogout
         },
         post: {
             login: postLogin,
