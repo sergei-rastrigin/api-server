@@ -1,8 +1,8 @@
-const validator = require('email-validator');
-const User = require('../models/user');
-const passport = require('passport');
+let validator = require('email-validator');
+let User = require('../models/user');
+let passport = require('passport');
 
-let userController = function(req, res, next) {
+let userController = function() {
     function postRegistration(req, res) {
         let isEmailValid = validator.validate(req.body.username);
 

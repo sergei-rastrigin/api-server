@@ -1,6 +1,6 @@
-const express = require('express');
-const authRouter = express.Router();
-const userController = require('../controllers/userController')();
+var express = require('express');
+var authRouter = express.Router();
+var userController = require('../controllers/userController')();
 
 authRouter
     .route('/registration')
