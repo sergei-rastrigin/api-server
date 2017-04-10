@@ -2,18 +2,42 @@ let validator = require('email-validator');
 let User = require('../models/user');
 let passport = require('passport');
 
-let userController = function() {
+let userCtrl = function userCtrl() {
     function postRegistration(req, res) {
         let isEmailValid = validator.validate(req.body.username);
+        let userDefault = {
+            username: req.body.username,
+            masterInfo: {
+                exp: 0,
+                styles: [],
+                tatoos: [],
+                flashes: []
+            },
+            isMaster: req.body.isMaster,
+            firstName: '',
+            lastName: '',
+            age: 0,
+            city: '',
+            description: '',
+            address: '',
+            mobile: '',
+            email: '',
+            sex: '',
+            avatar: '',
+            background: '',
+            social: {
+                facebook: '',
+                vk: '',
+                instagram: ''
+            }
+        };
 
         if (isEmailValid) {
-            User.register(new User({
-                    username: req.body.username
-                }), req.body.password,
+            User.register(new User(userDefault), req.body.password,
                 (err, user) => {
                     if (err) {
                         req.flash('error', err.message);
-                        res.redirect('/registration');
+                        res.redirect('/auth/registration');
                     }
 
                     passport.authenticate('local')(req, res, () => {
@@ -47,15 +71,15 @@ let userController = function() {
             failureFlash: true
         })(req, res, next);
     }
-    
-    function middleware(req, res, next) {
+
+    function checkUser(req, res, next) {
         if (!req.user) {
             res.redirect('/auth/login');
         } else {
             next();
         }
     }
-    
+
     function getIndex(req, res, next) {
         res.render('index');
     }
@@ -67,7 +91,7 @@ let userController = function() {
 
 
     return {
-        middleware: middleware,
+        checkUser,
         get: {
             login: getLogin,
             registration: getRegistration,
@@ -81,4 +105,4 @@ let userController = function() {
     }
 }
 
-module.exports = userController;
+module.exports = userCtrl();

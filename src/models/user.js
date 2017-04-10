@@ -2,22 +2,13 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose');
 
-var masterSchema = new Schema({
-    exp: Number,
-    styles: [{ type: String, ref: 'Style' }],
-    tatoos: [{ type: Schema.Types.ObjectId, ref: 'Tatoo' }],
-    flashes: [{ type: Schema.Types.ObjectId, ref: 'Flash' }]
-});
-
-var socialSchema = new Schema({
-    facebook: { type: String, unique: true },
-    vk: { type: String, unique: true },
-    instagram: { type: String, unique: true }
-});
-
 var userSchema = new Schema({
-    isMaster: { type: Boolean, default: false },
-    masterInfo: masterSchema,
+    masterInfo: {
+        exp: Number,
+        styles: [{ type: String, ref: 'Style' }],
+        tatoos: [{ type: Schema.Types.ObjectId, ref: 'Tatoo' }],
+        flashes: [{ type: Schema.Types.ObjectId, ref: 'Flash' }]
+    },
     createdBy: { type: Date, default: Date.now },
     firstName: String,
     lastName: String,
@@ -25,12 +16,16 @@ var userSchema = new Schema({
     city: { type: String, ref: 'City' },
     description: String,
     address: String,
-    mobile: { type: String, unique: true },
-    email: { type: String, unique: true },
+    mobile: { type: String },
+    email: { type: String },
     sex: String,
     avatar: String,
     background: String,
-    social: socialSchema,
+    social: {
+        facebook: { type: String },
+        vk: { type: String },
+        instagram: { type: String }
+    },
     username: String,
     password: String,
 });

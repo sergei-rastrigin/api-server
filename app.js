@@ -9,6 +9,7 @@ let passport = require('passport');
 let flash = require('express-flash');
 let session = require('express-session');
 const dbURL = require('./src/config/db.json').dbURL;
+let router = require('./src/routes');
 let app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
@@ -34,9 +35,7 @@ app.use(flash());
 // init passport settings and strategies
 require('./src/config/passport')(app);
 
-app.use('/', require('./src/routes/index'));
-app.use('/auth', require('./src/routes/auth'));
-// app.use('/api/v1', require('./src/routes/api'));
+app.use(router);
 /*  error handlers  */
 
 // production error handler
@@ -48,7 +47,6 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
 
 // subscribing on mongoose events
 db.on('error', console.error.bind(console, 'connection error:'));
