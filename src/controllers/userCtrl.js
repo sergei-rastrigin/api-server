@@ -73,7 +73,9 @@ let userCtrl = function userCtrl() {
     }
 
     function checkUser(req, res, next) {
-        if (!req.user) {
+        if (req.url === '/auth/login') {
+            next();
+        } else if (!req.user) {
             res.redirect('/auth/login');
         } else {
             next();

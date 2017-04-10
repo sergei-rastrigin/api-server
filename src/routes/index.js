@@ -3,7 +3,7 @@ let userCtrl = require('../controllers/userCtrl');
 let profileCtrl = require('../controllers/profileCtrl');
 
 router
-    .all(userCtrl.checkUser)
+    .all('*', userCtrl.checkUser)
     .get('/', userCtrl.get.index);
 
 
