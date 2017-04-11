@@ -1,5 +1,8 @@
-import _ from 'lodash';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
 
-_.each([1,2,3], (i, index, arr) => {
-    console.log(i);
-});
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+)
