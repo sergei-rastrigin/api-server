@@ -56,5 +56,5 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         // prints more readable module names in the browser console on HMR updates
     ],
-    devtool: NODE_ENV === 'development' ? "source-map" : null
+    devtool: "source-map"
 };
