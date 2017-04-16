@@ -19,7 +19,8 @@ module.exports = {
     ],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'app', 'build')
+        path: path.resolve(__dirname, 'app', 'build'),
+        publicPath: "/"
     },
 
     devServer: {
@@ -29,6 +30,8 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'app', 'build'),
         // match the output path
     },
+
+    watch: true,
 
 
     module: {
@@ -56,5 +59,5 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         // prints more readable module names in the browser console on HMR updates
     ],
-    devtool: "source-map"
+    devtool: "eval"
 };

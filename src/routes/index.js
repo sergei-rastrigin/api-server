@@ -3,16 +3,15 @@ let userCtrl = require('../controllers/userCtrl');
 let profileCtrl = require('../controllers/profileCtrl');
 
 router
-    .all('*', userCtrl.checkUser)
+    // .all('*', userCtrl.checkUser)
     .get('/', userCtrl.get.index);
 
-
 router
-    .get('/auth/registration', userCtrl.get.registration)
+    // .get('/auth/registration', userCtrl.get.registration)
     .post('/auth/registration', userCtrl.post.registration);
 
 router
-    .get('/auth/login', userCtrl.get.login)
+    // .get('/auth/login', userCtrl.get.login)
     .post('/auth/login', userCtrl.post.login);
 
 router

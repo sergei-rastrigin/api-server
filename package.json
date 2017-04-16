@@ -42,7 +42,6 @@
     "css-loader": "^0.28.0",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
-    "lodash": "^4.17.4",
     "nodemon": "^1.11.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "st": "^1.2.0",

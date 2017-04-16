@@ -1,16 +1,16 @@
-let express = require('express');
-let path = require('path');
-let favicon = require('serve-favicon');
-let logger = require('morgan');
-let cookieParser = require('cookie-parser');
-let mongoose = require('mongoose');
-let bodyParser = require('body-parser');
-let passport = require('passport');
-let flash = require('express-flash');
-let session = require('express-session');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
 const dbURL = require('./src/config/db.json').dbURL;
-let router = require('./src/routes');
-let app = express();
+const router = require('./src/routes');
+const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'pug');
@@ -37,6 +37,12 @@ require('./src/config/passport')(app);
 
 app.use(router);
 /*  error handlers  */
+
+app.use(function (req, res, next) {
+    res.status(404).render('404', {
+        message: 'Not Found'
+    });
+});
 
 // production error handler
 // no stacktraces leaked to user

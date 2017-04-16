@@ -6,11 +6,16 @@ let profileCtrl = function profileCtrl() {
             salt: false,
             hash: false,
             __v: false
-        }
-        User.findById(req.user._id, excluded, function (err, user) {
-            if (err) throw err;
-            res.json(user);
-        });
+        };
+
+        res.json(
+            {"hello":"server"}
+        );
+
+        // User.findById(req.user._id, excluded, function (err, user) {
+        //     if (err) throw err;
+        //     res.json(user);
+        // });
     }
 
     function postProfile(req, res) {
@@ -49,6 +54,6 @@ let profileCtrl = function profileCtrl() {
         }
     }
 
-}
+};
 
 module.exports = profileCtrl();
