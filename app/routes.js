@@ -1,45 +1,39 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
-import {Provider} from 'react-redux';
-import storeFactory from './store';
-// AppContainer is a necessary wrapper component for HMR
-import {AppContainer} from 'react-hot-loader';
-
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Route,
+    Switch,
     Link
-} from 'react-router-dom'
+} from 'react-router-dom';
 
+import Home from './components/homePage';
+import About from './components/aboutPage';
+import Profile from './components/profilePage';
+import PageNotFound from './components/pageNotFound';
 
-const store = storeFactory();
+const Routes = () => {
+    return (
+        <Router>
+            <div>
+                <ul>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/profile">Profile</Link></li>
+                    <li><Link to="/something-else">to something else</Link></li>
+                </ul>
 
-//TODO testing actions
-import { SET_GOAL } from './store/actions';
-store.dispatch(SET_GOAL(6));
+                <hr/>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/about" component={About} />
+                    <Route path="/profile" component={Profile} />
+                    <Route component={PageNotFound} />
+                </Switch>
 
-
-const render = () => {
-    ReactDOM.render(
-        <AppContainer>
-            <Provider store={store}>
-                <Router>
-                    {/*<div>*/}
-                        {/*<ul>*/}
-                            {/*<li><Link to="/">Home</Link></li>*/}
-                            {/*<li><Link to="/about">About</Link></li>*/}
-                        {/*</ul>*/}
-
-                        {/*<hr/>*/}
-
-                        {/*<Route exact path="/" component={HomePage}/>*/}
-                        {/*<Route path="/about" component={AboutPage}/>*/}
-                    {/*</div>*/}
-                </Router>
-            </Provider>
-        </AppContainer>,
-        document.getElementById('root')
-    );
+            </div>
+        </Router>
+    )
 };
 
-export default render
+
+export default Routes;
