@@ -1,0 +1,27 @@
+{
+	"profile": {
+		"masterInfo": {
+			"exp": 0,
+			"styles": [],
+			"tatoos": [],
+			"flashes": []
+		},
+		"isMaster": false,
+		"firstName": "",
+		"lastName": "",
+		"age": 0,
+		"city": "",
+		"description": "",
+		"address": "",
+		"mobile": "",
+		"email": "",
+		"sex": "",
+		"avatar": "",
+		"background": "",
+		"social": {
+			"facebook": "",
+			"vk": "",
+			"instagram": ""
+		}
+	}
+}
