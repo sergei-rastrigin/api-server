@@ -19,11 +19,11 @@ console.log(port)
  */
 
 let server = http.createServer(app);
-let io = require('socket.io')(server);
+// let io = require('socket.io')(server);
 
-io.on('connection', (socket) => {
-  socket.on('chat-capsule', require('../src/controllers/chatCtrl').bind(this, socket));
-});
+// io.on('connection', (socket) => {
+//   socket.on('chat-capsule', require('../src/controllers/chatCtrl').bind(this, socket));
+// });
 
 /**
  * Listen on provided port, on all network interfaces.

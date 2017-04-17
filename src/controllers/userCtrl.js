@@ -51,35 +51,15 @@ let userCtrl = function userCtrl() {
         }
     }
 
-    function getRegistration(req, res) {
-        res.render('registration');
-    }
-
-    function getLogin(req, res) {
-        if (req.user) {
-            res.redirect('/');
-        }
-        else {
-            res.render('login');
-        }
-    }
 
     function postLogin(req, res, next) {
-        passport.authenticate('local', {
-            successRedirect: '/',
-            failureRedirect: '/auth/login',
-            failureFlash: true
-        })(req, res, next);
-    }
-
-    function checkUser(req, res, next) {
-        if (req.url === '/auth/login') {
-            next();
-        } else if (!req.user) {
-            res.redirect('/auth/login');
-        } else {
-            next();
-        }
+            passport.authenticate('local', (err, user) => {
+                if (!user) {
+                    res.json({isAuthenticated: false, error: 'Invalid email or password'});
+                } else {
+                    res.json({isAuthenticated: true});
+                }
+            })(req, res);
     }
 
     function getIndex(req, res, next) {
@@ -93,10 +73,7 @@ let userCtrl = function userCtrl() {
 
 
     return {
-        checkUser,
         get: {
-            login: getLogin,
-            registration: getRegistration,
             index: getIndex,
             logout: getLogout
         },
@@ -105,6 +82,6 @@ let userCtrl = function userCtrl() {
             registration: postRegistration
         }
     }
-}
+};
 
 module.exports = userCtrl();
