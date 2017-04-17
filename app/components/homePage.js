@@ -1,16 +1,32 @@
 import {connect} from 'react-redux';
 import React from 'react';
 
-function HomePage(props) {
-    return (
-        <div>Home page</div>
-    )
+class HomePage extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+
+    }
+
+    render() {
+        return (
+            <div>Home Page</div>
+        )
+    }
 }
 
 const mapStateToProps = (state, props) => {
-
     return {}
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
 
-export default connect(mapStateToProps)(HomePage);
+    }
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

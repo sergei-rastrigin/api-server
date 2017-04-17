@@ -32,7 +32,8 @@ const tatoos = (state = [], action) => {
             return state.filter(tatoo => tatoo._id !== action.data);
         case T.CLEAR_TATOOS:
             return [];
-        default: return state;
+        default:
+            return state;
     }
 };
 
@@ -45,7 +46,8 @@ const flashes = (state = [], action) => {
             return state.filter(flash => flash._id !== action.data);
         case T.CLEAR_FLASHES:
             return [];
-        default: return state;
+        default:
+            return state;
     }
 };
 
@@ -124,7 +126,46 @@ const isMaster = (state = false, action) =>
         action.data :
         state;
 
+const isAuthenticated = (state = false, action) => {
+    switch (action.type) {
+        case T.SUCCESS_LOGIN:
+            return true;
+        case T.FAILURE_LOGIN:
+            return false;
+        default:
+            return state;
+    }
+};
 
+const fetching = (state = false, action) => {
+    switch (action.type) {
+        case T.CANCEL_FETCHING:
+        case T.SUCCESS_LOGIN:
+        case T.FAILURE_LOGIN:
+            return false;
+        case T.START_FETCHING:
+            return true;
+        default:
+            return state;
+    }
+};
+
+const errors = (state = [], action) => {
+    switch (action.type) {
+        case T.CLEAR_ERRORS:
+        case T.SUCCESS_LOGIN:
+            return [];
+        case T.ADD_ERROR:
+        case T.FAILURE_LOGIN:
+            if (state.indexOf(action.error) === -1) {
+                return [...state, action.error]
+            } else {
+                return state;
+            }
+        default:
+            return state;
+    }
+};
 
 export default combineReducers({
     profile: combineReducers({
@@ -151,5 +192,10 @@ export default combineReducers({
             vk,
             instagram
         })
+    }),
+    login: combineReducers({
+        isAuthenticated,
+        fetching,
+        errors
     })
 });

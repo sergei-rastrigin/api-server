@@ -9,6 +9,7 @@ import {
 import Home from './components/homePage';
 import About from './components/aboutPage';
 import Profile from './components/profilePage';
+import Login from './components/loginPage';
 import PageNotFound from './components/pageNotFound';
 
 const Routes = () => {
@@ -17,6 +18,7 @@ const Routes = () => {
             <div>
                 <ul>
                     <li><Link to="/">Home</Link></li>
+                    <li><Link to="/login">Login</Link></li>
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/something-else">to something else</Link></li>
@@ -26,6 +28,7 @@ const Routes = () => {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
+                    <Route path="/login" component={Login} />
                     <Route path="/profile" component={Profile} />
                     <Route component={PageNotFound} />
                 </Switch>

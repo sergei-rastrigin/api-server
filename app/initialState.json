@@ -23,5 +23,10 @@
 			"vk": "",
 			"instagram": ""
 		}
+	},
+	"login" : {
+		"isAuthenticated": false,
+		"fetching": false,
+		"errors": []
 	}
 }
