@@ -4,7 +4,7 @@ let profileCtrl = require('../controllers/profileCtrl');
 
 router
     .get('/', userCtrl.get.index)
-    .post('/auth/registration', userCtrl.post.registration)
+    .post('/auth/register', userCtrl.post.register)
     .post('/auth/login', userCtrl.post.login)
     .get('/auth/logout', userCtrl.get.logout)
     .get('/api/v1/profile', profileCtrl.get.profile)

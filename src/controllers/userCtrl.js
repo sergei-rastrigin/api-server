@@ -3,63 +3,35 @@ let User = require('../models/user');
 let passport = require('passport');
 
 let userCtrl = function userCtrl() {
-    function postRegistration(req, res) {
+    function postRegister(req, res) {
         let isEmailValid = validator.validate(req.body.username);
-        let userDefault = {
-            username: req.body.username,
-            masterInfo: {
-                exp: 0,
-                styles: [],
-                tatoos: [],
-                flashes: []
-            },
-            isMaster: req.body.isMaster,
-            firstName: '',
-            lastName: '',
-            age: 0,
-            city: '',
-            description: '',
-            address: '',
-            mobile: '',
-            email: '',
-            sex: '',
-            avatar: '',
-            background: '',
-            social: {
-                facebook: '',
-                vk: '',
-                instagram: ''
-            }
-        };
 
         if (isEmailValid) {
-            User.register(new User(userDefault), req.body.password,
+            User.register(new User({username: req.body.username}), req.body.password,
                 (err, user) => {
                     if (err) {
-                        req.flash('error', err.message);
-                        res.redirect('/auth/registration');
+                        res.json({error: err.message});
                     }
 
                     passport.authenticate('local')(req, res, () => {
-                        res.redirect('/');
+                        res.status(200).json({registration: 'ok'});
                     });
                 });
         }
         else {
-            req.flash('error', 'your email is not valid');
-            res.render('registration');
+            res.json({error: 'Please enter a valid email'});
         }
     }
 
 
     function postLogin(req, res, next) {
-            passport.authenticate('local', (err, user) => {
-                if (!user) {
-                    res.json({isAuthenticated: false, error: 'Invalid email or password'});
-                } else {
-                    res.json({isAuthenticated: true});
-                }
-            })(req, res);
+        passport.authenticate('local', (err, user) => {
+            if (!user) {
+                res.json({isAuthenticated: false, error: 'Invalid email or password'});
+            } else {
+                res.json({isAuthenticated: true});
+            }
+        })(req, res);
     }
 
     function getIndex(req, res, next) {
@@ -68,7 +40,7 @@ let userCtrl = function userCtrl() {
 
     function getLogout(req, res) {
         req.logout();
-        res.redirect('/');
+        res.status(200).json({isAuthenticated: false});
     }
 
 
@@ -79,7 +51,7 @@ let userCtrl = function userCtrl() {
         },
         post: {
             login: postLogin,
-            registration: postRegistration
+            register: postRegister
         }
     }
 };
