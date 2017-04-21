@@ -1,14 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  
-  h1 #{username}
-  
-  a(href='/auth/logout') Logout
-
-  #root
+    #root
 
 block scripts
-  script(src='build/bundle.js')
+    script(src='build/bundle.js')
