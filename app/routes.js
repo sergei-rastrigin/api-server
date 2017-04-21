@@ -2,37 +2,31 @@ import React from 'react';
 import {
     HashRouter as Router,
     Route,
-    Switch,
-    Link
+    Switch
 } from 'react-router-dom';
+import Home from './components/pages/home';
+import Profile from './components/pages/profile';
+import Login from './components/pages/login';
+import Register from './components/pages/register';
+import NotFound from './components/pages/notFound';
+import Header from './components/header';
+import requireAuthentication from './components/hoc/require_authentication';
 
-import Home from './components/homePage';
-import About from './components/aboutPage';
-import Profile from './components/profilePage';
-import Login from './components/loginPage';
-import PageNotFound from './components/pageNotFound';
+const ComposedProfile = requireAuthentication(Profile);
 
-const Routes = () => {
+const Routes = ({store}) => {
     return (
         <Router>
             <div>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/login">Login</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/profile">Profile</Link></li>
-                    <li><Link to="/something-else">to something else</Link></li>
-                </ul>
+                <Header/>
 
-                <hr/>
                 <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/about" component={About} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/profile" component={Profile} />
-                    <Route component={PageNotFound} />
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/profile" component={ComposedProfile}/>
+                    <Route path="/register" component={Register}/>
+                    <Route component={NotFound}/>
                 </Switch>
-
             </div>
         </Router>
     )
