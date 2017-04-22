@@ -1,6 +1,6 @@
 let router = require('express').Router();
-let userCtrl = require('../controllers/userCtrl');
-let profileCtrl = require('../controllers/profileCtrl');
+let userCtrl = require('./controllers/userCtrl');
+let profileCtrl = require('./controllers/profileCtrl');
 
 router
     .get('/', userCtrl.get.index)
