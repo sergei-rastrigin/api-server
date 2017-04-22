@@ -5,7 +5,6 @@ import storeFactory from './store';
 // AppContainer is a necessary wrapper component for HMR
 import {AppContainer} from 'react-hot-loader';
 import Routes from './routes';
-import * as sampleDate from './initialState.json';
 
 const initialState = (localStorage["redux-store"]) ?
     JSON.parse(localStorage["redux-store"]) :
@@ -15,15 +14,16 @@ const saveState = () =>
     localStorage["redux-store"] = JSON.stringify(store.getState());
 
 
-const store = storeFactory(initialState);
+const store = storeFactory();
 store.subscribe(saveState);
+
 window.store = store;
 
 const render = () => {
     ReactDOM.render(
         <AppContainer>
             <Provider store={store}>
-                <Routes />
+                <Routes store={store}/>
             </Provider>
         </AppContainer>,
         document.getElementById('root')

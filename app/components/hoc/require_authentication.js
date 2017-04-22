@@ -8,10 +8,9 @@ export default (ComposedComponent) => {
         }
 
         componentWillMount() {
-            const {isAuthenticated} = this.props.login;
+            const {isAuthenticated} = this.props.user;
             if(!isAuthenticated) {
                 this.props.history.push('/login');
-                console.log('user is not authenticated')
             }
         }
 
@@ -25,8 +24,7 @@ export default (ComposedComponent) => {
 
     function mapStateToProps(state, props) {
         return {
-            login: state.login,
-            router: props.router
+            user: state.user
         }
     }
 

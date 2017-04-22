@@ -16,7 +16,7 @@ const Login = (props) => {
                 <input type="password" name="password" className="form-control input-lg" ref={input => {
                     this.password = input;
                 }}/>
-            </div>
+            </div>1
             <div className="row">
                 <div className="col-md-6">
                     <button className="btn btn-lg btn-success btn-block" onClick={() => {

@@ -9,7 +9,7 @@ let profileCtrl = function profileCtrl() {
         };
 
         res.json(
-            {"hello":"server"}
+            {"hello": "server"}
         );
 
         // User.findById(req.user._id, excluded, function (err, user) {
@@ -29,15 +29,13 @@ let profileCtrl = function profileCtrl() {
             mobile,
             email,
             sex,
-            avatar,
-            background,
             social
         } = req.body;
 
-        User.update({ _id: req.user._id }, {
+        User.update({_id: req.user._id}, {
             $set: {
-                firstName, lastName, age, description,
-                address, mobile, email, sex
+                firstName, lastName, age, city, description,
+                address, mobile, email, sex, social
             }
         }, function (err, user) {
             if (err) throw err;
