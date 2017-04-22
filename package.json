@@ -6,12 +6,13 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
-    "email-validator": "^1.0.7",
     "express": "~4.14.0",
     "express-session": "^1.14.2",
+    "jwt-simple": "^0.5.1",
     "mongoose": "^4.6.6",
     "morgan": "~1.7.0",
     "passport": "^0.3.2",

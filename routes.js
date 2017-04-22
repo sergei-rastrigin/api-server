@@ -1,13 +1,11 @@
-let router = require('express').Router();
-let userCtrl = require('./controllers/userCtrl');
+let Authentication = require('./controllers/authentication');
 let profileCtrl = require('./controllers/profileCtrl');
 
-router
-    .get('/', userCtrl.get.index)
-    .post('/auth/register', userCtrl.post.register)
-    .post('/auth/login', userCtrl.post.login)
-    .get('/auth/logout', userCtrl.get.logout)
-    .get('/api/v1/profile', profileCtrl.get.profile)
-    .post('/api/v1/profile', profileCtrl.post.profile);
+function routes(app) {
+    app
+        .post('/signup', Authentication.signup)
+        .post('/signin', Authentication.signin)
+        .post('/logout', Authentication.logout);
+}
 
-module.exports = router;
+module.exports = routes;
