@@ -1,5 +1,12 @@
 const User = require('../models/user');
 const passport = require('passport');
+const jwt = require('jwt-simple');
+const {secret} = require('../config');
+
+function tokenForUser(user) {
+    const timestamp = new Date().getTime();
+    return jwt.encode({sub: user.id, iat: timestamp}, secret);
+}
 
 function signup(req, res, next) {
     const {email, password} = req.body;
@@ -11,7 +18,9 @@ function signup(req, res, next) {
 
     // See if a user with the given email exists
     User.findOne({email}, (err, existingUser) => {
-        if (err) { return next(err)}
+        if (err) {
+            return next(err)
+        }
 
         if (existingUser) {
             return res.status(422).send({error: 'email is in use'});
@@ -23,33 +32,18 @@ function signup(req, res, next) {
         });
 
         user.save(err => {
-            if (err) { return next(err)}
+            if (err) {
+                return next(err)
+            }
 
-            res.json({success: true});
+            res.json({token : tokenForUser(user)});
         })
     });
-
-    // User.register(new User({email: email}), password,
-    //     (err, user) => {
-    //         if (err) {
-    //             res.json({error: err.message});
-    //         }
-    //
-    //         passport.authenticate('local')(req, res, () => {
-    //             res.status(200).json({registration: 'ok'});
-    //         });
-    //     });
 }
 
 
 function signin(req, res, next) {
-    passport.authenticate('local', (err, user) => {
-        if (!user) {
-            res.json({isAuthenticated: false, error: 'Invalid email or password'});
-        } else {
-            res.json({isAuthenticated: true});
-        }
-    })(req, res);
+    res.json({token: tokenForUser(req.user)});
 }
 
 function logout(req, res) {
