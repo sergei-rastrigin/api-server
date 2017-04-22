@@ -21,12 +21,13 @@ const userSchema = new Schema({
     sex: String,
     avatar: String,
     background: String,
+    role: {type: String, default: 'user'},
     social: {
         facebook: { type: String },
         vk: { type: String },
         instagram: { type: String }
     },
-    username: String,
+    username: {type: String, unique: true, lowercase: true},
     password: String,
 });
 
