@@ -36,7 +36,7 @@ function signup(req, res, next) {
                 return next(err)
             }
 
-            res.json({token : tokenForUser(user)});
+            res.json({token: tokenForUser(user)});
         })
     });
 }
@@ -46,7 +46,7 @@ function signin(req, res, next) {
     res.json({token: tokenForUser(req.user)});
 }
 
-function logout(req, res) {
+function signout(req, res) {
     req.logout();
     res.status(200).json({isAuthenticated: false});
 }
@@ -55,5 +55,5 @@ function logout(req, res) {
 module.exports = {
     signup,
     signin,
-    logout
+    signout
 };

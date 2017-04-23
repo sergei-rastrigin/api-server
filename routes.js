@@ -13,7 +13,7 @@ function routes(app) {
         })
         .post('/signup', Authentication.signup)
         .post('/signin', requireSignIn, Authentication.signin)
-        .post('/logout', Authentication.logout);
+        .post('/signout', Authentication.signout);
 }
 
 module.exports = routes;
