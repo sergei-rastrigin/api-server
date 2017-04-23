@@ -23,7 +23,7 @@ function signup(req, res, next) {
         }
 
         if (existingUser) {
-            return res.status(422).send({error: 'email is in use'});
+            return res.status(422).send({error: 'User with that email already exists'});
         }
 
         const user = new User({
@@ -46,14 +46,7 @@ function signin(req, res, next) {
     res.json({token: tokenForUser(req.user)});
 }
 
-function signout(req, res) {
-    req.logout();
-    res.status(200).json({isAuthenticated: false});
-}
-
-
 module.exports = {
     signup,
-    signin,
-    signout
+    signin
 };

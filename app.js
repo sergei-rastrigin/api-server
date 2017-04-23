@@ -4,6 +4,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const http = require('http');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const passport = require('passport');
 const {dbURL} = require('./config');
 const routes = require('./routes');
@@ -14,6 +15,7 @@ mongoose.connect(dbURL);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cors());
 
 routes(app);
 

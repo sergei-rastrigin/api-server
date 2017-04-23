@@ -12,8 +12,7 @@ function routes(app) {
             res.send('haha its work')
         })
         .post('/signup', Authentication.signup)
-        .post('/signin', requireSignIn, Authentication.signin)
-        .post('/signout', Authentication.signout);
+        .post('/signin', requireSignIn, Authentication.signin);
 }
 
 module.exports = routes;
